@@ -8,7 +8,7 @@ class Unit_kerja extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // is_login();
+        is_login();
         $this->load->model('Unit_kerja_model');
         $this->load->library('form_validation');
     }
@@ -28,7 +28,7 @@ class Unit_kerja extends CI_Controller
         if ($row) {
             $data = array(
 		'unit_kerja_id' => $row->unit_kerja_id,
-		'nam_unit_kerja' => $row->nam_unit_kerja,
+		'nama_unit_kerja' => $row->nama_unit_kerja,
 	    );
             $this->template->load('template','unit_kerja/unit_kerja_read', $data);
         } else {
@@ -43,7 +43,7 @@ class Unit_kerja extends CI_Controller
             'button' => 'Create',
             'action' => site_url('unit_kerja/create_action'),
 	    'unit_kerja_id' => set_value('unit_kerja_id'),
-	    'nam_unit_kerja' => set_value('nam_unit_kerja'),
+	    'nama_unit_kerja' => set_value('nama_unit_kerja'),
 	);
         $this->template->load('template','unit_kerja/unit_kerja_form', $data);
     }
@@ -56,7 +56,7 @@ class Unit_kerja extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nam_unit_kerja' => $this->input->post('nam_unit_kerja',TRUE),
+		'nama_unit_kerja' => $this->input->post('nama_unit_kerja',TRUE),
 	    );
 
             $this->Unit_kerja_model->insert($data);
@@ -74,7 +74,7 @@ class Unit_kerja extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('unit_kerja/update_action'),
 		'unit_kerja_id' => set_value('unit_kerja_id', $row->unit_kerja_id),
-		'nam_unit_kerja' => set_value('nam_unit_kerja', $row->nam_unit_kerja),
+		'nama_unit_kerja' => set_value('nama_unit_kerja', $row->nama_unit_kerja),
 	    );
             $this->template->load('template','unit_kerja/unit_kerja_form', $data);
         } else {
@@ -91,7 +91,7 @@ class Unit_kerja extends CI_Controller
             $this->update($this->input->post('unit_kerja_id', TRUE));
         } else {
             $data = array(
-		'nam_unit_kerja' => $this->input->post('nam_unit_kerja',TRUE),
+		'nama_unit_kerja' => $this->input->post('nama_unit_kerja',TRUE),
 	    );
 
             $this->Unit_kerja_model->update($this->input->post('unit_kerja_id', TRUE), $data);
@@ -116,7 +116,7 @@ class Unit_kerja extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('nam_unit_kerja', 'nam unit kerja', 'trim|required');
+	$this->form_validation->set_rules('nama_unit_kerja', 'nama unit kerja', 'trim|required');
 
 	$this->form_validation->set_rules('unit_kerja_id', 'unit_kerja_id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

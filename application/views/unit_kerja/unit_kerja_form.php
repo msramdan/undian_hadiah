@@ -20,7 +20,7 @@
             <form action="<?php echo $action; ?>" method="post">
             <thead>
             <table id="data-table-default" class="table  table-bordered table-hover table-td-valign-middle">
-	    <tr><td>Nam Unit Kerja <?php echo form_error('nam_unit_kerja') ?></td><td><input type="text" class="form-control" name="nam_unit_kerja" id="nam_unit_kerja" placeholder="Nam Unit Kerja" value="<?php echo $nam_unit_kerja; ?>" /></td></tr>
+	    <tr><td>Nama Unit Kerja <?php echo form_error('nama_unit_kerja') ?></td><td><input type="text" class="form-control" name="nama_unit_kerja" id="nama_unit_kerja" placeholder="Nama Unit Kerja" value="<?php echo $nama_unit_kerja; ?>" /></td></tr>
 	    <tr><td></td><td><input type="hidden" name="unit_kerja_id" value="<?php echo $unit_kerja_id; ?>" /> 
 	    <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> <?php echo $button ?></button> 
 	    <a href="<?php echo site_url('unit_kerja') ?>" class="btn btn-info"><i class="fa fa-undo"></i> Kembali</a></td></tr>

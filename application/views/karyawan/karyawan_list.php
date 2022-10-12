@@ -1,3 +1,30 @@
+<div class="modal fade" id="modal-dialog-import">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title">Import Data Karyawan</h4><br>
+				<a href="<?= base_url() ?>format-upload-karyawan.xlsx" type="button" class="btn btn-success">Download Format Upload</a>
+			</div>
+			<div class="modal-body">
+				<form action="<?= base_url() ?>karyawan/import" method="POST" enctype="multipart/form-data">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">File Excel</label>
+							<input id="file" class="form-control" name="upload_file" type="file">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a href="javascript:;" class="btn btn-sm btn-white" data-dismiss="modal">Close</a>
+						<button type="submit" class="btn btn-sm btn-success">Upload</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div id="content" class="content">
 	<ol class="breadcrumb pull-right">
 		<li><a href="javascript:;">Dashboard</a></li>
@@ -24,7 +51,8 @@
 										<div class='col-md-9'>
 											<div style="padding-bottom: 10px;">
 												<?php echo anchor(site_url('karyawan/create'), '<i class="fa fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm tambah_data"'); ?>
-												<?php echo anchor(site_url('karyawan/excel'), '<i class="far fa-file-excel" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm export_data"'); ?>
+
+												<a href="#modal-dialog-import" class="btn btn-sm btn-success" data-toggle="modal">Import Excel</a>
 											</div>
 										</div>
 									</div>
@@ -35,8 +63,8 @@
 													<th>No</th>
 													<th>Nik</th>
 													<th>Nama Karyawan</th>
-													<th>Jabatan Id</th>
-													<th>Unit Kerja Id</th>
+													<th>Jabatan</th>
+													<th>Unit Kerja</th>
 													<th>Jenis Kelamin</th>
 													<th>No Telpon</th>
 													<th>Action</th>
@@ -49,8 +77,8 @@
 														<td><?= $no++ ?></td>
 														<td><?php echo $karyawan->nik ?></td>
 														<td><?php echo $karyawan->nama_karyawan ?></td>
-														<td><?php echo $karyawan->jabatan_id ?></td>
-														<td><?php echo $karyawan->unit_kerja_id ?></td>
+														<td><?php echo $karyawan->nama_jabatan ?></td>
+														<td><?php echo $karyawan->nama_unit_kerja ?></td>
 														<td><?php echo $karyawan->jenis_kelamin ?></td>
 														<td><?php echo $karyawan->no_telpon ?></td>
 														<td style="text-align:center" width="200px">
@@ -73,3 +101,5 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>

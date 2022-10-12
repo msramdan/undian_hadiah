@@ -8,13 +8,16 @@ class Dashboard extends CI_Controller {
     {
         parent::__construct();
         is_login();
+		$this->load->model('Karyawan_model');
 		// check_admin();
     }
 
 	public function index()
 	{
-
-		$this->template->load('template','dashboard');
+		$data = array(
+            'karyawan_data' => $this->Karyawan_model->get_all(),
+        );
+		$this->template->load('template','dashboard', $data);
 	}
 
 }

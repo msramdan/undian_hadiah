@@ -32,7 +32,7 @@ class Unit_kerja_model extends CI_Model
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('unit_kerja_id', $q);
-	$this->db->or_like('nam_unit_kerja', $q);
+	$this->db->or_like('nama_unit_kerja', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }

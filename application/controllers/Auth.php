@@ -10,7 +10,7 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
-		// check_already_login();
+		check_already_login();
 		$this->load->view('login');
 	}
 

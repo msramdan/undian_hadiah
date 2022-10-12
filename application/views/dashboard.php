@@ -73,22 +73,68 @@
 </style>
 <div id="content" class="content">
 	<div class="row">
-		<div class="col-md-6" style="position: relative;">
-			<div class="wrapper">
-				<div class="container-wheel">
-					<canvas id="wheel"></canvas>
-					<button id="spin-btn">Spin</button>
-					<img class="arrow-spinner" src="<?= base_url('temp/assets/img/spinner-arrow-.svg') ?>" alt="spinner-arrow" />
-				</div>
-				<div id="final-value">
-					<p>Click On The Spin Button To Start</p>
+		<div class="col-md-7" style="position: relative;">
+			<div class="panel panel-inverse">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="box-body">
+									<center>
+										<div class="wrapper">
+											<div class="container-wheel">
+												<canvas id="wheel"></canvas>
+												<button id="spin-btn">Spin</button>
+												<img class="arrow-spinner" src="<?= base_url('temp/assets/img/spinner-arrow-.svg') ?>" alt="spinner-arrow" />
+											</div>
+											<div id="final-value">
+												<p>Click On The Spin Button To Start</p>
+											</div>
+										</div>
+									</center>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
-			adsads
+		<div class="col-md-5">
+			<div class="panel panel-inverse">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="box-body">
+									<div class="box-body">
+										<table id="data-table" class="table table-sm table-bordered table-hover table-td-valign-middle">
+											<thead>
+												<tr>
+													<th>Nik</th>
+													<th>Nama Karyawan</th>
+												</tr>
+											</thead>
+											<tbody><?php $no = 1;
+													foreach ($karyawan_data as $karyawan) {
+													?>
+													<tr>
+														<td><?php echo $karyawan->nik ?></td>
+														<td><?php echo $karyawan->nama_karyawan ?></td>
+													</tr>
+												<?php } ?>
+											</tbody>
+										</table>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
 </div>
 
 <!-- Chart JS -->

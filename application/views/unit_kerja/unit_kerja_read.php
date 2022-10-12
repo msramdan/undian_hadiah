@@ -17,7 +17,7 @@
 			</div>
 			<div class="panel-body">
 <table id="data-table-default" class="table table-hover table-bordered table-td-valign-middle">
-	    <tr><td>Nam Unit Kerja</td><td><?php echo $nam_unit_kerja; ?></td></tr>
+	    <tr><td>Nama Unit Kerja</td><td><?php echo $nama_unit_kerja; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('unit_kerja') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
 			</div>
