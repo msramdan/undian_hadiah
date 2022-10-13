@@ -36,4 +36,9 @@ class Dashboard extends CI_Controller {
 		echo json_encode($arrppl);
 	}
 
+	public function jumlah_karyawan() {
+		$data = $this->Karyawan_model->get_all();
+		echo count($data);
+	}
+
 }

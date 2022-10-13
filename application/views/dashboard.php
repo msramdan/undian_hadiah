@@ -159,7 +159,7 @@ td.pw3
 		'textFontSize': 8, // Set default font size for the segments.
 		'textOrientation': 'vertical', // Make text vertial so goes down from the outside of wheel.
 		'textAlignment': 'outer', // Align text to outside of wheel.
-		'numSegments': 24, // Specify number of segments.
+		'numSegments': <?= $disclass->jumlah_karyawan() ?>, // Specify number of segments.
 		'segments': <?= $disclass->list_spinwheeldata() ?>,
 		'animation': // Specify the animation to use.
 		{
