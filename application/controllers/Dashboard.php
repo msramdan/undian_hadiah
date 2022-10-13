@@ -28,6 +28,7 @@ class Dashboard extends CI_Controller {
 
 		foreach($data as $v) {
 			$arrppl[] = [
+				'id_karyawan' => $v->karyawan_id,
 				'fillStyle' => sprintf('#%06X', mt_rand(0, 0xFFFFFF)),
 				'text' => $v->nama_karyawan
 			];

@@ -129,14 +129,18 @@ td.pw3
 													<th>Nama Karyawan</th>
 												</tr>
 											</thead>
-											<tbody><?php $no = 1;
+											<tbody>
+												<?php 
+													$no = 1;
 													foreach ($karyawan_data as $karyawan) {
 													?>
 													<tr>
 														<td><?php echo $karyawan->nik ?></td>
 														<td><?php echo $karyawan->nama_karyawan ?></td>
 													</tr>
-												<?php } ?>
+													<?php
+													 } 
+												?>
 											</tbody>
 										</table>
 
@@ -157,7 +161,7 @@ td.pw3
 		'outerRadius': 212, // Set outer radius so wheel fits inside the background.
 		'innerRadius': 75, // Make wheel hollow so segments don't go all way to center.
 		'textFontSize': 8, // Set default font size for the segments.
-		'textOrientation': 'vertical', // Make text vertial so goes down from the outside of wheel.
+		// 'textOrientation': 'vertical', // Make text vertial so goes down from the outside of wheel.
 		'textAlignment': 'outer', // Align text to outside of wheel.
 		'numSegments': <?= $disclass->jumlah_karyawan() ?>, // Specify number of segments.
 		'segments': <?= $disclass->list_spinwheeldata() ?>,
@@ -283,7 +287,7 @@ td.pw3
 		} else if (indicatedSegment.text == 'BANKRUPT') {
 			alert('Oh no, you have gone BANKRUPT!');
 		} else {
-			alert(indicatedSegment.text + " Menang!");
+			alert(indicatedSegment.text + " Menang! ID:" + indicatedSegment.id_karyawan);
 		}
 	}
 	// // update mychart.data.datasets[0].data using ajax
