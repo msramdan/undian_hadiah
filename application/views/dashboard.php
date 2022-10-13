@@ -131,6 +131,7 @@ td.pw3
 												<tr>
 													<th>ID</th>
 													<th>Nama Karyawan</th>
+													<th>Tindakan</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -142,6 +143,7 @@ td.pw3
 												<tr>
 													<td><?= $row->karyawan_id ?></td>
 													<td><?= $row->nama_karyawan ?></td>
+													<td><button class="btn btn-sm btn-danger btn-deletepemenang" style="width: 100%;"><i class="fa fa-trash"></i></button></td>
 												</tr>
 												<?php 
 														}
@@ -286,6 +288,7 @@ td.pw3
 		$('#data-table').DataTable().row.add([
 			datanya.id_karyawan,
 			datanya.nama_karyawan,
+			'<button class="btn btn-sm btn-danger btn-deletepemenang" style="width: 100%;"><i class="fa fa-trash"></i></button>'
 		]).draw(false);
 
 
@@ -329,4 +332,46 @@ td.pw3
 			}
 		});
 	}
+
+	$(document).ready(function() {
+		$(document).on('click', '.btn-deletepemenang', function() {
+			var id_karyawan = $(this).closest('tr').find('td:eq(0)').text();
+			var nama_karyawan = $(this).closest('tr').find('td:eq(1)').text();
+			var row = $(this).closest('tr');
+			swal.fire({
+				title: 'Apakah anda yakin?',
+				text: "Karyawan " + nama_karyawan + " akan dihapus dari daftar pemenang!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, hapus!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: "<?= base_url('dashboard/delete_pemenang') ?>",
+						type: "POST",
+						data: {
+							id_karyawan: id_karyawan
+						},
+						success: function(data) {
+							console.log(data);
+							theWheel.addSegment({
+								'text': nama_karyawan,
+								'id_karyawan': id_karyawan,
+								'fillStyle': Math.floor(Math.random()*16777215).toString(16),
+							});
+							theWheel.draw();
+							row.remove();
+							swal.fire(
+								'Dihapus!',
+								'Karyawan ' + nama_karyawan + ' telah dihapus dari daftar pemenang.',
+								'success'
+							)
+						}
+					});
+				}
+			})
+		});
+	})
 </script>

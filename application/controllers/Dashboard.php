@@ -57,4 +57,19 @@ class Dashboard extends CI_Controller {
 		echo json_encode($arr);
 	}
 
+	public function delete_pemenang() {
+		$id = $this->input->post('id_karyawan');
+		$data_karyawan = $this->Karyawan_model->get_by_id($id);
+		$this->Karyawan_model->delete_pemenang($id);
+
+		$arr = [
+			'karyawan_id' => $data_karyawan->karyawan_id,
+			'nama_karyawan' => $data_karyawan->nama_karyawan,
+			'status' => 'success',
+			'message' => 'Data berhasil dihapus'
+		];
+
+		echo json_encode($arr);
+	}
+
 }

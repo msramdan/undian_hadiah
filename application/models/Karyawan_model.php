@@ -81,4 +81,9 @@ class Karyawan_model extends CI_Model
         return $this->db->query($query)->result();
     }
 
+    function delete_pemenang($id) {
+        $this->db->where('karyawan_id', $id);
+        $this->db->delete('pemenang');
+    }
+
 }
