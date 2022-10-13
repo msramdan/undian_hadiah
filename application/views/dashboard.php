@@ -130,7 +130,7 @@ td.pw3
 											<thead>
 												<tr>
 													<th>ID</th>
-													<th>Nama Karyawan</th>
+													<th>Nama Peserta</th>
 													<th>Tindakan</th>
 												</tr>
 											</thead>

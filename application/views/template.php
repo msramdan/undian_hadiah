@@ -122,7 +122,7 @@
 					<li class="nav-header">Main Menu</li>
 					<li><a href="<?= base_url() ?>dashboard"><i class="fa fa-spinner" aria-hidden="true"></i> <span>Undian Doorprize</span></a></li>
 					<li><a href="<?= base_url() ?>qr"><i class="fa fa-qrcode" aria-hidden="true"></i> <span>QR Code Form</span></a></li>
-					<li><a href="<?= base_url() ?>karyawan"><i class="fa fa-users"></i> <span>Karyawan</span></a></li>
+					<li><a href="<?= base_url() ?>karyawan"><i class="fa fa-users"></i> <span>Peserta</span></a></li>
 					<li><a href="<?= base_url() ?>jabatan"><i class="fa fa-list"></i> <span>Jabatan</span></a></li>
 					<li><a href="<?= base_url() ?>unit_kerja"><i class="fa fa-list"></i> <span>Unit Kerja</span></a></li>
 					<li><a href="<?= base_url() ?>user"><i class="fa fa-user"></i> <span>Data User</span></a></li>

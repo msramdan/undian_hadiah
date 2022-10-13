@@ -61,7 +61,7 @@
 											<thead>
 												<tr>
 													<th>No</th>
-													<th>Nama Karyawan</th>
+													<th>Nama Peserta</th>
 													<th>Jabatan</th>
 													<th>Unit Kerja</th>
 													<th>Jenis Kelamin</th>
