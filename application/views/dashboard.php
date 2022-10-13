@@ -1,76 +1,69 @@
 <style>
-	.wrapper {
-		width: 90%;
-		max-width: 34.37em;
-		max-height: 90vh;
-		background-color: #ffffff;
-		padding: 3em;
-		border-radius: 1em;
-		box-shadow: 0 4em 5em rgba(27, 8, 53, 0.2);
-	}
 
-	.container-wheel {
-		position: relative;
-		width: 100%;
-		height: 100%;
-	}
+td.the_wheel
+{
+    background-image: url(./temp/assets/img/wheel_back.png);
+    background-position: center;
+    background-repeat: none;
+}
 
-	#wheel {
-		max-height: inherit;
-		width: inherit;
-		top: 0;
-		padding: 0;
-	}
+/* Do some css reset on selected elements */
 
-	@keyframes rotate {
-		100% {
-			transform: rotate(360deg);
-		}
-	}
+div.power_controls
+{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
-	#spin-btn {
-		position: absolute;
-		transform: translate(-50%, -50%);
-		top: 50%;
-		left: 50%;
-		height: 26%;
-		width: 26%;
-		border-radius: 50%;
-		cursor: pointer;
-		border: 0;
-		background: radial-gradient(#fdcf3b 50%, #d88a40 85%);
-		color: #c66e16;
-		text-transform: uppercase;
-		font-size: 1.8em;
-		letter-spacing: 0.1em;
-		font-weight: 600;
-	}
+div.html5_logo
+{
+    margin-left:70px;
+}
 
-	img.arrow-spinner {
-		position: absolute;
-		width: 4em;
-		top: 45%;
-		right: -8%;
-	}
+/* Styles for the power selection controls */
+table.power
+{
+    background-color: #cccccc;
+    cursor: pointer;
+    border:1px solid #333333;
+}
 
-	#final-value {
-		font-size: 1.5em;
-		text-align: center;
-		margin-top: 1.5em;
-		color: #202020;
-		font-weight: 500;
-	}
+table.power th
+{
+    background-color: white;
+    cursor: default;
+}
 
-	@media screen and (max-width: 768px) {
-		.wrapper {
-			font-size: 12px;
-		}
+td.pw1
+{
+    background-color: #6fe8f0;
+}
 
-		img.arrow-spinner {
-			right: -5%;
-		}
-	}
+td.pw2
+{
+    background-color: #86ef6f;
+}
+
+td.pw3
+{
+    background-color: #ef6f6f;
+}
+
+/* Style applied to the spin button once a power has been selected */
+.clickable
+{
+    cursor: pointer;
+}
+
+/* Other misc styles */
+.margin_bottom
+{
+    margin-bottom: 5px;
+}
+
 </style>
+
 <div id="content" class="content">
 	<div class="row">
 		<div class="col-md-7" style="position: relative;">
@@ -82,15 +75,40 @@
 								<div class="box-body">
 									<center>
 										<div class="wrapper">
-											<div class="container-wheel">
-												<canvas id="wheel"></canvas>
-												<button id="spin-btn">Spin</button>
-												<img class="arrow-spinner" src="<?= base_url('temp/assets/img/spinner-arrow-.svg') ?>" alt="spinner-arrow" />
-											</div>
-											<div id="final-value">
-												<p>Click On The Spin Button To Start</p>
-											</div>
-										</div>
+											<table cellpadding="0" cellspacing="0" border="0">
+												<tr>
+													<td>
+														<div class="power_controls">
+															<br />
+															<br />
+															<table class="power" cellpadding="10" cellspacing="0">
+																<tr>
+																	<th align="center" colspan="3" style="text-align: center;">Tenaga Putaran</th>
+																</tr>
+																<tr>
+																	<td width="78" align="center" id="pw3" onClick="powerSelected(3);">High</td>
+																	<td width="78" align="center" id="pw2" onClick="powerSelected(2);">Med</td>
+																	<td width="78" align="center" id="pw1" onClick="powerSelected(1);">Low</td>
+																</tr>
+															</table>
+															<img id="spin_button" src="<?= base_url('temp/assets/img/spin_off.png') ?>" alt="Spin" onClick="startSpin();" />
+															<div>
+																<a href="#" onClick="resetWheel(); return false;" style="line-height: 4;">Reset</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td width="438" height="582" class="the_wheel" align="center" valign="center">
+														<canvas id="canvas" width="434" height="434">
+															<p style="color: white;" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
+														</canvas>
+														<audio id="winsound">
+															<source src="<?= base_url().'temp/assets/tada.mp3' ?>" />
+														</audio>
+													</td>
+												</tr>
+											</table>
 									</center>
 								</div>
 							</div>
@@ -107,21 +125,30 @@
 							<div class="x_panel">
 								<div class="box-body">
 									<div class="box-body">
+										<h3>Pemenang</h3>
 										<table id="data-table" class="table table-sm table-bordered table-hover table-td-valign-middle">
 											<thead>
 												<tr>
-													<th>Nik</th>
+													<th>ID</th>
 													<th>Nama Karyawan</th>
+													<th>Tindakan</th>
 												</tr>
 											</thead>
-											<tbody><?php $no = 1;
-													foreach ($karyawan_data as $karyawan) {
-													?>
-													<tr>
-														<td><?php echo $karyawan->nik ?></td>
-														<td><?php echo $karyawan->nama_karyawan ?></td>
-													</tr>
-												<?php } ?>
+											<tbody>
+												<?php 
+													$no = 1;
+													if($pemenang_list) {
+														foreach($pemenang_list as $row) {
+												?>
+												<tr>
+													<td><?= $row->karyawan_id ?></td>
+													<td><?= $row->nama_karyawan ?></td>
+													<td><button class="btn btn-sm btn-danger btn-deletepemenang" style="width: 100%;"><i class="fa fa-trash"></i></button></td>
+												</tr>
+												<?php 
+														}
+													}
+												?>
 											</tbody>
 										</table>
 
@@ -137,144 +164,214 @@
 
 </div>
 
-<!-- Chart JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-<!-- Chart JS Plugin for displaying text over chart -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js"></script>
-<!-- Script -->
 <script>
-	const wheel = document.getElementById("wheel");
-	const spinBtn = document.getElementById("spin-btn");
-	const finalValue = document.getElementById("final-value");
-	//Object that stores values of minimum and maximum angle for a value
-	const rotationValues = [{
-			minDegree: 0,
-			maxDegree: 30,
-			value: 2
-		},
+	let theWheel = new Winwheel({
+		'outerRadius': 212, // Set outer radius so wheel fits inside the background.
+		'innerRadius': 75, // Make wheel hollow so segments don't go all way to center.
+		'textFontSize': 8, // Set default font size for the segments.
+		// 'textOrientation': 'vertical', // Make text vertial so goes down from the outside of wheel.
+		'textAlignment': 'outer', // Align text to outside of wheel.
+		'numSegments': <?= $disclass->jumlah_karyawanyangbelummenang() ?>, // Specify number of segments.
+		'segments': <?= $disclass->list_karyawanbelummenang() ?>,
+		'animation': // Specify the animation to use.
 		{
-			minDegree: 31,
-			maxDegree: 90,
-			value: 1
+			'type': 'spinToStop',
+			'duration': 10, // Duration in seconds.
+			'spins': 3, // Default number of complete spins.
+			'callbackFinished': alertPrize,
+			'callbackSound': playSound, // Function to call when the tick sound is to be triggered.
+			'soundTrigger': 'pin' // Specify pins are to trigger the sound, the other option is 'segment'.
 		},
+		'pins': // Turn pins on.
 		{
-			minDegree: 91,
-			maxDegree: 150,
-			value: 6
-		},
-		{
-			minDegree: 151,
-			maxDegree: 210,
-			value: 5
-		},
-		{
-			minDegree: 211,
-			maxDegree: 270,
-			value: 4
-		},
-		{
-			minDegree: 271,
-			maxDegree: 330,
-			value: 3
-		},
-		{
-			minDegree: 331,
-			maxDegree: 360,
-			value: 2
-		},
-	];
-	//Size of each piece
-	const data = [16, 16, 16, 16, 16, 16];
-	//background color for each piece
-	var pieColors = [
-		"#8b35bc",
-		"#b163da",
-		"#8b35bc",
-		"#b163da",
-		"#8b35bc",
-		"#b163da",
-	];
-	//Create chart
-	let myChart = new Chart(wheel, {
-		//Plugin for displaying text on pie chart
-		plugins: [ChartDataLabels],
-		//Chart Type Pie
-		type: "pie",
-		data: {
-			//Labels(values which are to be displayed on chart)
-			labels: [1, 2, 3, 4, 5, 6],
-			//Settings for dataset/pie
-			datasets: [{
-				backgroundColor: pieColors,
-				data: data,
-			}, ],
-		},
-		options: {
-			//Responsive chart
-			responsive: true,
-			animation: {
-				duration: 0
-			},
-			plugins: {
-				//hide tooltip and legend
-				tooltip: false,
-				legend: {
-					display: false,
-				},
-				//display labels inside pie chart
-				datalabels: {
-					color: "#ffffff",
-					formatter: (_, context) => context.chart.data.labels[context.dataIndex],
-					font: {
-						size: 24
-					},
-				},
-			},
-		},
-	});
-	//display value based on the randomAngle
-	const valueGenerator = (angleValue) => {
-		for (let i of rotationValues) {
-			//if the angleValue is between min and max then display it
-			if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
-				finalValue.innerHTML = `<p>Value: ${i.value}</p>`;
-				spinBtn.disabled = false;
-				break;
-			}
+			'number': 24,
+			'fillStyle': 'silver',
+			'outerRadius': 4,
 		}
-	};
-
-	//Spinner count
-	let count = 0;
-	//100 rotations for animation and last rotation for result
-	let resultValue = 101;
-	//Start spinning
-	spinBtn.addEventListener("click", () => {
-		spinBtn.disabled = true;
-		//Empty final value
-		finalValue.innerHTML = `<p>Good Luck!</p>`;
-		//Generate random degrees to stop at
-		let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
-		//Interval for rotation animation
-		let rotationInterval = window.setInterval(() => {
-			//Set rotation for piechart
-			/*
-			Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
-			*/
-			myChart.options.rotation = myChart.options.rotation + resultValue;
-			//Update chart with new value;
-			myChart.update();
-			//If rotation>360 reset it back to 0
-			if (myChart.options.rotation >= 360) {
-				count += 1;
-				resultValue -= 5;
-				myChart.options.rotation = 0;
-			} else if (count > 15 && myChart.options.rotation == randomDegree) {
-				valueGenerator(randomDegree);
-				clearInterval(rotationInterval);
-				count = 0;
-				resultValue = 101;
-			}
-		}, 10);
 	});
+
+	// Loads the tick audio sound in to an audio object.
+	let audio = new Audio('<?= base_url('temp/assets/tick.mp3') ?>');
+
+	// This function is called when the sound is to be played.
+	function playSound() {
+		// Stop and rewind the sound if it already happens to be playing.
+		audio.pause();
+		audio.currentTime = 0;
+
+		// Play the sound.
+		audio.play();
+	}
+
+	// Vars used by the code in this page to do power controls.
+	let wheelPower = 0;
+	let wheelSpinning = false;
+
+	// -------------------------------------------------------
+	// Function to handle the onClick on the power buttons.
+	// -------------------------------------------------------
+	function powerSelected(powerLevel) {
+		// Ensure that power can't be changed while wheel is spinning.
+		if (wheelSpinning == false) {
+			// Reset all to grey incase this is not the first time the user has selected the power.
+			document.getElementById('pw1').className = "";
+			document.getElementById('pw2').className = "";
+			document.getElementById('pw3').className = "";
+
+			// Now light up all cells below-and-including the one selected by changing the class.
+			if (powerLevel >= 1) {
+				document.getElementById('pw1').className = "pw1";
+			}
+
+			if (powerLevel >= 2) {
+				document.getElementById('pw2').className = "pw2";
+			}
+
+			if (powerLevel >= 3) {
+				document.getElementById('pw3').className = "pw3";
+			}
+
+			// Set wheelPower var used when spin button is clicked.
+			wheelPower = powerLevel;
+
+			// Light up the spin button by changing it's source image and adding a clickable class to it.
+			document.getElementById('spin_button').src = "<?= base_url('temp/assets/img/spin_on.png') ?>";
+			document.getElementById('spin_button').className = "clickable";
+		}
+	}
+
+	// -------------------------------------------------------
+	// Click handler for spin button.
+	// -------------------------------------------------------
+	function startSpin() {
+		// Ensure that spinning can't be clicked again while already running.
+		if (wheelSpinning == false) {
+			// Based on the power level selected adjust the number of spins for the wheel, the more times is has
+			// to rotate with the duration of the animation the quicker the wheel spins.
+			if (wheelPower == 1) {
+				theWheel.animation.spins = 3;
+			} else if (wheelPower == 2) {
+				theWheel.animation.spins = 6;
+			} else if (wheelPower == 3) {
+				theWheel.animation.spins = 10;
+			}
+
+			// Disable the spin button so can't click again while wheel is spinning.
+			document.getElementById('spin_button').src = "<?= base_url('temp/assets/img/spin_off.png')?>";
+			document.getElementById('spin_button').className = "";
+
+			// Begin the spin animation by calling startAnimation on the wheel object.
+			theWheel.startAnimation();
+
+			// Set to true so that power can't be changed and spin button re-enabled during
+			// the current animation. The user will have to reset before spinning again.
+			wheelSpinning = true;
+		}
+	}
+
+	// -------------------------------------------------------
+	// Function for reset button.
+	// -------------------------------------------------------
+	function resetWheel() {
+		theWheel.stopAnimation(false); // Stop the animation, false as param so does not call callback function.
+		theWheel.rotationAngle = 0; // Re-set the wheel angle to 0 degrees.
+		theWheel.draw(); // Call draw to render changes to the wheel.
+
+		document.getElementById('pw1').className = ""; // Remove all colours from the power level indicators.
+		document.getElementById('pw2').className = "";
+		document.getElementById('pw3').className = "";
+
+		wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
+	}
+
+	function add_data_todatatable(datanya) {
+		$('#data-table').DataTable().row.add([
+			datanya.id_karyawan,
+			datanya.nama_karyawan,
+			'<button class="btn btn-sm btn-danger btn-deletepemenang" style="width: 100%;"><i class="fa fa-trash"></i></button>'
+		]).draw(false);
+
+
+	}
+
+	// -------------------------------------------------------
+	// Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
+	// -------------------------------------------------------
+	function alertPrize(indicatedSegment) {
+		// Just alert to the user what happened.
+		// In a real project probably want to do something more interesting than this with the result.
+		const segmentid = theWheel.getIndicatedSegmentNumber();
+		swal.fire({
+			icon: 'success',
+			title: 'Selamat!',
+			text: indicatedSegment.text + " Menang! ID:" + indicatedSegment.id_karyawan + "/" + segmentid
+		})
+		let winsound = document.getElementById('winsound');
+        winsound.play();
+
+		$.ajax({
+			url: "<?= base_url('dashboard/insert_pemenang') ?>",
+			type: "POST",
+			data: {
+				id_karyawan: indicatedSegment.id_karyawan
+			},
+			success: function(data) {
+				console.log(data);
+				// theWheel.deleteSegment(0);
+				theWheel.deleteSegment(segmentid);
+				theWheel.draw();
+
+				var datany = {
+					id_karyawan: indicatedSegment.id_karyawan,
+					nama_karyawan: indicatedSegment.text
+				}
+
+				add_data_todatatable(datany);
+
+
+			}
+		});
+	}
+
+	$(document).ready(function() {
+		$(document).on('click', '.btn-deletepemenang', function() {
+			var id_karyawan = $(this).closest('tr').find('td:eq(0)').text();
+			var nama_karyawan = $(this).closest('tr').find('td:eq(1)').text();
+			var row = $(this).closest('tr');
+			swal.fire({
+				title: 'Apakah anda yakin?',
+				text: "Karyawan " + nama_karyawan + " akan dihapus dari daftar pemenang!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, hapus!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: "<?= base_url('dashboard/delete_pemenang') ?>",
+						type: "POST",
+						data: {
+							id_karyawan: id_karyawan
+						},
+						success: function(data) {
+							console.log(data);
+							theWheel.addSegment({
+								'text': nama_karyawan,
+								'id_karyawan': id_karyawan,
+								'fillStyle': Math.floor(Math.random()*16777215).toString(16),
+							});
+							theWheel.draw();
+							row.remove();
+							swal.fire(
+								'Dihapus!',
+								'Karyawan ' + nama_karyawan + ' telah dihapus dari daftar pemenang.',
+								'success'
+							)
+						}
+					});
+				}
+			})
+		});
+	})
 </script>
