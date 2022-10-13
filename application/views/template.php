@@ -12,7 +12,7 @@
 	<meta content="" name="author" />
 
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<link href="<?= base_url() ?>temp/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
 	<link href="<?= base_url() ?>temp/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="<?= base_url() ?>temp/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -29,6 +29,8 @@
 
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="<?= base_url() ?>temp/assets/plugins/pace/pace.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+	<script src="<?= base_url('temp/assets/js/Winwheel.min.js') ?>"></script>
 	<!-- ================== END BASE JS ================== -->
 </head>
 

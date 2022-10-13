@@ -16,13 +16,24 @@ class Dashboard extends CI_Controller {
 	{
 		$data = array(
             'karyawan_data' => $this->Karyawan_model->get_all(),
+			'disclass' => $this
         );
 		$this->template->load('template','dashboard', $data);
 	}
 
-	public function list_karyawan() {
+	public function list_spinwheeldata() {
 		$data = $this->Karyawan_model->get_all();
-		echo json_encode($data);
+
+		$arrppl = [];
+
+		foreach($data as $v) {
+			$arrppl[] = [
+				'fillStyle' => sprintf('#%06X', mt_rand(0, 0xFFFFFF)),
+				'text' => $v->nama_karyawan
+			];
+		}
+
+		echo json_encode($arrppl);
 	}
 
 }
