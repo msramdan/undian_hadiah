@@ -16,13 +16,14 @@ class Dashboard extends CI_Controller {
 	{
 		$data = array(
             'karyawan_data' => $this->Karyawan_model->get_all(),
+			'pemenang_list' => $this->Karyawan_model->list_pemenang(),
 			'disclass' => $this
         );
 		$this->template->load('template','dashboard', $data);
 	}
 
-	public function list_spinwheeldata() {
-		$data = $this->Karyawan_model->get_all();
+	public function list_karyawanbelummenang() {
+		$data = $this->Karyawan_model->karyawan_belum_menang();
 
 		$arrppl = [];
 
@@ -37,9 +38,23 @@ class Dashboard extends CI_Controller {
 		echo json_encode($arrppl);
 	}
 
-	public function jumlah_karyawan() {
-		$data = $this->Karyawan_model->get_all();
+	public function jumlah_karyawanyangbelummenang() {
+		$data = $this->Karyawan_model->karyawan_belum_menang();
 		echo count($data);
+	}
+
+	public function insert_pemenang() {
+		$data = array(
+			'karyawan_id' => $this->input->post('id_karyawan'),
+		);
+		$this->Karyawan_model->insert_pemenang($data);
+
+		$arr = [
+			'status' => 'success',
+			'message' => 'Data berhasil disimpan'
+		];
+
+		echo json_encode($arr);
 	}
 
 }

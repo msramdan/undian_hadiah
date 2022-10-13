@@ -31,6 +31,7 @@
 	<script src="<?= base_url() ?>temp/assets/plugins/pace/pace.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 	<script src="<?= base_url('temp/assets/js/Winwheel.min.js') ?>"></script>
+	<script src="<?= base_url() ?>temp/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
 </head>
 
@@ -147,7 +148,6 @@
 	<!-- end page container -->
 
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="<?= base_url() ?>temp/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
 	<script src="<?= base_url() ?>temp/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
 	<script src="<?= base_url() ?>temp/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
 	<script src="<?= base_url() ?>temp/assets/plugins/bootstrap/js/bootstrap.min.js"></script>

@@ -51,6 +51,11 @@ class Karyawan_model extends CI_Model
         $this->db->insert($this->table, $data);
     }
 
+    function insert_pemenang($data)
+    {
+        $this->db->insert('pemenang', $data);
+    }
+
     // update data
     function update($id, $data)
     {
@@ -63,6 +68,17 @@ class Karyawan_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    function karyawan_belum_menang() {
+        $query = "SELECT karyawan.karyawan_id as 'karyawan_id', karyawan.nama_karyawan as 'nama_karyawan' FROM `karyawan` LEFT JOIN `pemenang` ON pemenang.karyawan_id = karyawan.karyawan_id WHERE pemenang.karyawan_id IS NULL;";
+
+        return $this->db->query($query)->result();
+    }
+
+    function list_pemenang() {
+        $query = "SELECT karyawan.karyawan_id as 'karyawan_id', karyawan.nama_karyawan as 'nama_karyawan' FROM `pemenang` JOIN `karyawan` ON karyawan.karyawan_id = pemenang.karyawan_id;";
+        return $this->db->query($query)->result();
     }
 
 }

@@ -99,10 +99,13 @@ td.pw3
 													</td>
 												</tr>
 												<tr>
-																										<td width="438" height="582" class="the_wheel" align="center" valign="center">
+													<td width="438" height="582" class="the_wheel" align="center" valign="center">
 														<canvas id="canvas" width="434" height="434">
 															<p style="color: white;" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
 														</canvas>
+														<audio id="winsound">
+															<source src="<?= base_url().'temp/assets/tada.mp3' ?>" />
+														</audio>
 													</td>
 												</tr>
 											</table>
@@ -122,24 +125,27 @@ td.pw3
 							<div class="x_panel">
 								<div class="box-body">
 									<div class="box-body">
+										<h3>Pemenang</h3>
 										<table id="data-table" class="table table-sm table-bordered table-hover table-td-valign-middle">
 											<thead>
 												<tr>
-													<th>Nik</th>
+													<th>ID</th>
 													<th>Nama Karyawan</th>
 												</tr>
 											</thead>
 											<tbody>
 												<?php 
 													$no = 1;
-													foreach ($karyawan_data as $karyawan) {
-													?>
-													<tr>
-														<td><?php echo $karyawan->nik ?></td>
-														<td><?php echo $karyawan->nama_karyawan ?></td>
-													</tr>
-													<?php
-													 } 
+													if($pemenang_list) {
+														foreach($pemenang_list as $row) {
+												?>
+												<tr>
+													<td><?= $row->karyawan_id ?></td>
+													<td><?= $row->nama_karyawan ?></td>
+												</tr>
+												<?php 
+														}
+													}
 												?>
 											</tbody>
 										</table>
@@ -163,8 +169,8 @@ td.pw3
 		'textFontSize': 8, // Set default font size for the segments.
 		// 'textOrientation': 'vertical', // Make text vertial so goes down from the outside of wheel.
 		'textAlignment': 'outer', // Align text to outside of wheel.
-		'numSegments': <?= $disclass->jumlah_karyawan() ?>, // Specify number of segments.
-		'segments': <?= $disclass->list_spinwheeldata() ?>,
+		'numSegments': <?= $disclass->jumlah_karyawanyangbelummenang() ?>, // Specify number of segments.
+		'segments': <?= $disclass->list_karyawanbelummenang() ?>,
 		'animation': // Specify the animation to use.
 		{
 			'type': 'spinToStop',
@@ -276,34 +282,51 @@ td.pw3
 		wheelSpinning = false; // Reset to false to power buttons and spin can be clicked again.
 	}
 
+	function add_data_todatatable(datanya) {
+		$('#data-table').DataTable().row.add([
+			datanya.id_karyawan,
+			datanya.nama_karyawan,
+		]).draw(false);
+
+
+	}
+
 	// -------------------------------------------------------
 	// Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
 	// -------------------------------------------------------
 	function alertPrize(indicatedSegment) {
 		// Just alert to the user what happened.
 		// In a real project probably want to do something more interesting than this with the result.
-		if (indicatedSegment.text == 'LOOSE TURN') {
-			alert('Sorry but you loose a turn.');
-		} else if (indicatedSegment.text == 'BANKRUPT') {
-			alert('Oh no, you have gone BANKRUPT!');
-		} else {
-			alert(indicatedSegment.text + " Menang! ID:" + indicatedSegment.id_karyawan);
-		}
+		const segmentid = theWheel.getIndicatedSegmentNumber();
+		swal.fire({
+			icon: 'success',
+			title: 'Selamat!',
+			text: indicatedSegment.text + " Menang! ID:" + indicatedSegment.id_karyawan + "/" + segmentid
+		})
+		let winsound = document.getElementById('winsound');
+        winsound.play();
+
+		$.ajax({
+			url: "<?= base_url('dashboard/insert_pemenang') ?>",
+			type: "POST",
+			data: {
+				id_karyawan: indicatedSegment.id_karyawan
+			},
+			success: function(data) {
+				console.log(data);
+				// theWheel.deleteSegment(0);
+				theWheel.deleteSegment(segmentid);
+				theWheel.draw();
+
+				var datany = {
+					id_karyawan: indicatedSegment.id_karyawan,
+					nama_karyawan: indicatedSegment.text
+				}
+
+				add_data_todatatable(datany);
+
+
+			}
+		});
 	}
-	// // update mychart.data.datasets[0].data using ajax
-	// fetch("<?= base_url('dashboard/list_karyawan') ?>")
-	// 	.then(response => response.json())
-	// 	.then(data => {
-	// 		console.log(data);
-
-	// 		let data_nik = []
-
-	// 		data.forEach(element => {
-	// 			data_nik.push(element.nik)
-	// 		});
-	// 		console.log(data_nik)
-	// 		myChart.data.datasets[0].data = data_nik
-	// 		myChart.data.labels = data_nik
-	// 		myChart.update();
-	// 	})
 </script>
