@@ -20,4 +20,9 @@ class Dashboard extends CI_Controller {
 		$this->template->load('template','dashboard', $data);
 	}
 
+	public function list_karyawan() {
+		$data = $this->Karyawan_model->get_all();
+		echo json_encode($data);
+	}
+
 }
