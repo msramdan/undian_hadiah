@@ -61,7 +61,6 @@
 											<thead>
 												<tr>
 													<th>No</th>
-													<th>Nik</th>
 													<th>Nama Karyawan</th>
 													<th>Jabatan</th>
 													<th>Unit Kerja</th>
@@ -75,7 +74,6 @@
 													?>
 													<tr>
 														<td><?= $no++ ?></td>
-														<td><?php echo $karyawan->nik ?></td>
 														<td><?php echo $karyawan->nama_karyawan ?></td>
 														<td><?php echo $karyawan->nama_jabatan ?></td>
 														<td><?php echo $karyawan->nama_unit_kerja ?></td>

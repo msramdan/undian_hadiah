@@ -48,22 +48,15 @@ class Karyawan extends CI_Controller
             $sheetData = $spreadsheet->getActiveSheet()->toArray();
             if (!empty($sheetData)) {
                 for ($i = 1; $i < count($sheetData); $i++) {
-                    $nik = $sheetData[$i][0];
-                    $nama_karyawan = $sheetData[$i][1];
-                    $jenis_kelamin = $sheetData[$i][2];
-                    $no_telpon = $sheetData[$i][3];
-                    // count data
-                    $jml = $this->db->query("SELECT * from karyawan where nik='$nik'")->num_rows();
-                    // tambah data
-                    if ($jml == 0) {
+                    $nama_karyawan = $sheetData[$i][0];
+                    $jenis_kelamin = $sheetData[$i][1];
+                    $no_telpon = $sheetData[$i][2];
                         $data = array(
-                            'nik' => $nik,
                             'nama_karyawan' => $nama_karyawan,
                             'jenis_kelamin' => $jenis_kelamin,
                             'no_telpon' => $no_telpon,
                         );
                         $this->db->insert('karyawan', $data);
-                    }
                 }
             }
         }
@@ -77,7 +70,6 @@ class Karyawan extends CI_Controller
         if ($row) {
             $data = array(
                 'karyawan_id' => $row->karyawan_id,
-                'nik' => $row->nik,
                 'nama_karyawan' => $row->nama_karyawan,
                 'jabatan_id' => $row->jabatan_id,
                 'unit_kerja_id' => $row->unit_kerja_id,
@@ -99,7 +91,6 @@ class Karyawan extends CI_Controller
             'unit_kerja' => $this->Unit_kerja_model->get_all(),
             'action' => site_url('karyawan/create_action'),
             'karyawan_id' => set_value('karyawan_id'),
-            'nik' => set_value('nik'),
             'nama_karyawan' => set_value('nama_karyawan'),
             'jabatan_id' => set_value('jabatan_id'),
             'unit_kerja_id' => set_value('unit_kerja_id'),
@@ -117,7 +108,6 @@ class Karyawan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-                'nik' => $this->input->post('nik', TRUE),
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
                 'jabatan_id' => $this->input->post('jabatan_id', TRUE),
                 'unit_kerja_id' => $this->input->post('unit_kerja_id', TRUE),
@@ -140,7 +130,6 @@ class Karyawan extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('karyawan/update_action'),
                 'karyawan_id' => set_value('karyawan_id', $row->karyawan_id),
-                'nik' => set_value('nik', $row->nik),
                 'jabatan' => $this->Jabatan_model->get_all(),
                 'unit_kerja' => $this->Unit_kerja_model->get_all(),
                 'nama_karyawan' => set_value('nama_karyawan', $row->nama_karyawan),
@@ -164,7 +153,6 @@ class Karyawan extends CI_Controller
             $this->update($this->input->post('karyawan_id', TRUE));
         } else {
             $data = array(
-                'nik' => $this->input->post('nik', TRUE),
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
                 'jabatan_id' => $this->input->post('jabatan_id', TRUE),
                 'unit_kerja_id' => $this->input->post('unit_kerja_id', TRUE),
@@ -194,7 +182,6 @@ class Karyawan extends CI_Controller
 
     public function _rules()
     {
-        $this->form_validation->set_rules('nik', 'nik', 'trim|required');
         $this->form_validation->set_rules('nama_karyawan', 'nama karyawan', 'trim|required');
         $this->form_validation->set_rules('jabatan_id', 'jabatan id', 'trim|required');
         $this->form_validation->set_rules('unit_kerja_id', 'unit kerja id', 'trim|required');
@@ -227,7 +214,6 @@ class Karyawan extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-        xlsWriteLabel($tablehead, $kolomhead++, "Nik");
         xlsWriteLabel($tablehead, $kolomhead++, "Nama Karyawan");
         xlsWriteLabel($tablehead, $kolomhead++, "Jabatan Id");
         xlsWriteLabel($tablehead, $kolomhead++, "Unit Kerja Id");
@@ -239,7 +225,6 @@ class Karyawan extends CI_Controller
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-            xlsWriteLabel($tablebody, $kolombody++, $data->nik);
             xlsWriteLabel($tablebody, $kolombody++, $data->nama_karyawan);
             xlsWriteNumber($tablebody, $kolombody++, $data->jabatan_id);
             xlsWriteNumber($tablebody, $kolombody++, $data->unit_kerja_id);

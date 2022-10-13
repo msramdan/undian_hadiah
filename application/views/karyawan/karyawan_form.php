@@ -21,10 +21,6 @@
 						<thead>
 							<table id="data-table-default" class="table  table-bordered table-hover table-td-valign-middle">
 								<tr>
-									<td>Nik <?php echo form_error('nik') ?></td>
-									<td><input type="text" class="form-control" name="nik" id="nik" placeholder="Nik" value="<?php echo $nik; ?>" /></td>
-								</tr>
-								<tr>
 									<td>Nama Karyawan <?php echo form_error('nama_karyawan') ?></td>
 									<td><input type="text" class="form-control" name="nama_karyawan" id="nama_karyawan" placeholder="Nama Karyawan" value="<?php echo $nama_karyawan; ?>" /></td>
 								</tr>

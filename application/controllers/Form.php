@@ -25,11 +25,7 @@ class Form extends CI_Controller
 
     public function create_action()
     {
-        $nik = $this->input->post('nik');
-        $jml = $this->db->query("SELECT * from karyawan where nik='$nik'")->num_rows();
-        if ($jml == 0) {
             $data = array(
-                'nik' => $this->input->post('nik', TRUE),
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
                 'jabatan_id' => $this->input->post('jabatan_id', TRUE),
                 'unit_kerja_id' => $this->input->post('unit_kerja_id', TRUE),
@@ -38,9 +34,6 @@ class Form extends CI_Controller
             );
             $this->Karyawan_model->insert($data);
             $this->session->set_flashdata('message', 'Pendaftaran Undian Doorprize Berhasil');
-        } else {
-            $this->session->set_flashdata('error', 'NIK Sudah Terdaftar');
-        }
         redirect(site_url('form'));
     }
 }

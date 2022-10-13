@@ -304,7 +304,9 @@ td.pw3
 		swal.fire({
 			icon: 'success',
 			title: 'Selamat!',
-			text: indicatedSegment.text + " Menang! ID:" + indicatedSegment.id_karyawan + "/" + segmentid
+			// ramdan
+			// text: indicatedSegment.text + " Menang! ID:" + indicatedSegment.id_karyawan + "/" + segmentid
+			text: indicatedSegment.text + " Menang!"
 		})
 		let winsound = document.getElementById('winsound');
         winsound.play();

@@ -54,10 +54,6 @@
 
                             <form action="<?= base_url() ?>form/create_action" method="POST" style="padding: 10px;">
                                 <div class="form-group">
-                                    <label for="nik">NIK</label>
-                                    <input type="number" class="form-control" id="nik" name="nik" placeholder="" required>
-                                </div>
-                                <div class="form-group">
                                     <label for="nama_karyawan">Nama Lengkap</label>
                                     <input type="text" class="form-control" name="nama_karyawan" id="nama_karyawan" placeholder="" required>
                                 </div>
