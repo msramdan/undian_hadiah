@@ -126,7 +126,7 @@ td.pw3
 								<div class="box-body">
 									<div class="box-body">
 										<h3>Pemenang</h3>
-										<table id="data-table" class="table table-sm table-bordered table-hover table-td-valign-middle">
+										<table id="table-pemenang" class="table table-sm table-bordered table-hover table-td-valign-middle">
 											<thead>
 												<tr>
 													<th style="width: 7%;">ID</th>
@@ -191,6 +191,30 @@ td.pw3
 
 
 <script>
+
+	function refreshDataPemenang() {
+		var tblny = $('#table-pemenang').DataTable();
+
+		// ajax get data karyawan
+		$.ajax({
+			url: "<?= base_url('dashboard/list_karyawanmenang') ?>",
+			type: "GET",
+			success: function(data){
+				var dt = JSON.parse(data);
+				// refresh datatable
+				tblny.clear().draw();
+
+				// insert data to datatable
+				$.each(dt, function(index, val) {
+					tblny.row.add([
+						val.karyawan_id,
+						val.nama_karyawan,
+						'<button class="btn btn-sm btn-danger btn-deletepemenang" style="width: 100%;"><i class="fa fa-trash"></i></button>'
+					]).draw();
+				});
+			}
+		})
+	}
 	let theWheel = new Winwheel({
 		'outerRadius': 212, // Set outer radius so wheel fits inside the background.
 		'innerRadius': 75, // Make wheel hollow so segments don't go all way to center.
@@ -311,13 +335,7 @@ td.pw3
 	}
 
 	function add_data_todatatable(datanya) {
-		$('#data-table').DataTable().row.add([
-			datanya.id_karyawan,
-			datanya.nama_karyawan,
-			'<button class="btn btn-sm btn-danger btn-deletepemenang" style="width: 100%;"><i class="fa fa-trash"></i></button>'
-		]).draw(false);
-
-
+		refreshDataPemenang()
 	}
 
 	// -------------------------------------------------------
@@ -369,7 +387,14 @@ td.pw3
 		return color;
 	}
 
+	
+
 	$(document).ready(function() {
+		$('#table-pemenang').DataTable({
+			// disable ordering
+			"ordering": false,
+		});
+
 		$(document).on('click', '.btn-deletepemenang', function() {
 			var id_karyawan = $(this).closest('tr').find('td:eq(0)').text();
 			var nama_karyawan = $(this).closest('tr').find('td:eq(1)').text();
@@ -398,7 +423,7 @@ td.pw3
 								'fillStyle': '#' + randColor(),
 							});
 							theWheel.draw();
-							row.remove();
+							refreshDataPemenang();
 							swal.fire(
 								'Dihapus!',
 								'Karyawan ' + nama_karyawan + ' telah dihapus dari daftar pemenang.',
@@ -411,12 +436,4 @@ td.pw3
 		});
 	})
 </script>
-
-<script>
-
-	$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
-</script>
-
 

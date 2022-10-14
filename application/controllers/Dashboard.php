@@ -14,6 +14,7 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
+
 		$data = array(
             'karyawan_data' => $this->Karyawan_model->get_all(),
 			'pemenang_list' => $this->Karyawan_model->list_pemenang(),
@@ -58,12 +59,19 @@ class Dashboard extends CI_Controller {
 		echo json_encode($arrppl);
 	}
 
+	public function list_karyawanmenang() {
+		$data = $this->Karyawan_model->list_pemenang();
+
+		echo json_encode($data);
+	}
+
 	public function jumlah_karyawanyangbelummenang() {
 		$data = $this->Karyawan_model->karyawan_belum_menang();
 		echo count($data);
 	}
 
 	public function insert_pemenang() {
+
 		$data = array(
 			'karyawan_id' => $this->input->post('id_karyawan'),
 		);
