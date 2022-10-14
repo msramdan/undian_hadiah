@@ -85,4 +85,8 @@ class Karyawan_model extends CI_Model
         $this->db->delete('pemenang');
     }
 
+    function delete_all() {
+        $this->db->empty_table('pemenang');
+    }
+
 }
