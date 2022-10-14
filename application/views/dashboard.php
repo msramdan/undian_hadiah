@@ -361,6 +361,14 @@ td.pw3
 		});
 	}
 
+	function randColor() {
+		var color = (function lol(m, s, c) {
+						return s[m.floor(m.random() * s.length)] +
+							(c && lol(m, s, c - 1));
+					})(Math, '3456789ABCDEF', 4);
+		return color;
+	}
+
 	$(document).ready(function() {
 		$(document).on('click', '.btn-deletepemenang', function() {
 			var id_karyawan = $(this).closest('tr').find('td:eq(0)').text();
@@ -387,7 +395,7 @@ td.pw3
 							theWheel.addSegment({
 								'text': nama_karyawan,
 								'id_karyawan': id_karyawan,
-								'fillStyle': Math.floor(Math.random()*16777215).toString(16),
+								'fillStyle': '#' + randColor(),
 							});
 							theWheel.draw();
 							row.remove();

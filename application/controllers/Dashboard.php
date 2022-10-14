@@ -28,10 +28,29 @@ class Dashboard extends CI_Controller {
 
 		$arrppl = [];
 
+		function adjustBrightness($hexCode, $adjustPercent) {
+			$hexCode = ltrim($hexCode, '#');
+		
+			if (strlen($hexCode) == 3) {
+				$hexCode = $hexCode[0] . $hexCode[0] . $hexCode[1] . $hexCode[1] . $hexCode[2] . $hexCode[2];
+			}
+		
+			$hexCode = array_map('hexdec', str_split($hexCode, 2));
+		
+			foreach ($hexCode as & $color) {
+				$adjustableLimit = $adjustPercent < 0 ? $color : 255 - $color;
+				$adjustAmount = ceil($adjustableLimit * $adjustPercent);
+		
+				$color = str_pad(dechex($color + $adjustAmount), 2, '0', STR_PAD_LEFT);
+			}
+		
+			return '#' . implode($hexCode);
+		}
+
 		foreach($data as $v) {
 			$arrppl[] = [
 				'id_karyawan' => $v->karyawan_id,
-				'fillStyle' => sprintf('#%06X', mt_rand(0, 0xFFFFFF)),
+				'fillStyle' => adjustBrightness(sprintf('#%06X', mt_rand(0, 0xFFFFFF)), 0.5),
 				'text' => $v->nama_karyawan
 			];
 		}
