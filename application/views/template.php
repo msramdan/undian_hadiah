@@ -76,7 +76,7 @@
 			<div class="container-fluid">
 				<!-- begin mobile sidebar expand / collapse button -->
 				<div class="navbar-header">
-					<a href="<?= base_url() ?>dashboard" class="navbar-brand"><span class="navbar-logo"></span> Undian Doorprize</a>
+					<a href="<?= base_url() ?>dashboard" class="navbar-brand"><img src="<?= base_url() ?>temp/assets/logo.png" style="width: 100%;" /></a>
 					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>

@@ -122,10 +122,13 @@ td.pw3
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
+						<button class="btn btn-sm btn-warning btn-deletepemenang-all" ><i class="fa fa-refresh" aria-hidden="true"></i> Reset Semua Pemenang</button>
 							<div class="x_panel">
 								<div class="box-body">
+								
 									<div class="box-body">
-										<h3>Pemenang</h3>
+										<h3>Pemenang</h3> 
+										
 										<table id="data-table" class="table table-sm table-bordered table-hover table-td-valign-middle">
 											<thead>
 												<tr>
@@ -355,8 +358,6 @@ td.pw3
 				}
 
 				add_data_todatatable(datany);
-
-
 			}
 		});
 	}
@@ -397,6 +398,42 @@ td.pw3
 								'success'
 							)
 						}
+					});
+				}
+			})
+		});
+	});
+
+	// delete all
+	$(document).ready(function() {
+		$(document).on('click', '.btn-deletepemenang-all', function() {
+			swal.fire({
+				title: 'Apakah anda yakin?',
+				text: "Semua pemenang akan dihapus dari daftar!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, hapus!'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url: "<?= base_url('dashboard/delete_all') ?>",
+						type: "POST",
+						data: {
+							
+						},
+						success: function(data) {
+							console.log(data);
+							swal.fire(
+								'Dihapus!',
+								'Semua Pemenang telah dihapus dari daftar',
+								'success'
+							)
+							setTimeout(window.location.reload.bind(window.location), 2000);
+						}
+						
+						
 					});
 				}
 			})

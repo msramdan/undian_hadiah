@@ -73,4 +73,15 @@ class Dashboard extends CI_Controller {
 		echo json_encode($arr);
 	}
 
+	public function delete_all() {
+		$this->Karyawan_model->delete_all();
+
+		$arr = [
+			'status' => 'success',
+			'message' => 'Data berhasil dihapus'
+		];
+
+		echo json_encode($arr);
+	}
+
 }

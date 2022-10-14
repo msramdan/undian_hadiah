@@ -1,6 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -52,6 +53,9 @@ class Karyawan extends CI_Controller
                     $jabatan = $sheetData[$i][2];
                     $no_telpon = $sheetData[$i][3];
                     $email = $sheetData[$i][4];
+
+                    $jml = $this->db->query("SELECT * from karyawan where no_telpon='$no_telpon' OR email='$email'")->num_rows();
+                    if ($jml == 0) {
                         $data = array(
                             'nama_karyawan' => $nama_karyawan,
                             'instansi' => $instansi,
@@ -60,6 +64,7 @@ class Karyawan extends CI_Controller
                             'email' => $email,
                         );
                         $this->db->insert('karyawan', $data);
+                    }
                 }
             }
         }
@@ -90,17 +95,23 @@ class Karyawan extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
-            $data = array(
-                'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
-                'pekerjaan_id' => $this->input->post('pekerjaan_id', TRUE),
-                'jabatan' => $this->input->post('jabatan', TRUE),
-                'instansi' => $this->input->post('instansi', TRUE),
-                'no_telpon' => $this->input->post('no_telpon', TRUE),
-                'email' => $this->input->post('email', TRUE),
-            );
-
-            $this->Karyawan_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $no_telpon = $this->input->post('no_telpon', TRUE);
+            $email = $this->input->post('email', TRUE);
+            $jml = $this->db->query("SELECT * from karyawan where no_telpon='$no_telpon' OR email='$email'")->num_rows();
+            if ($jml == 0) {
+                $data = array(
+                    'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
+                    'pekerjaan_id' => $this->input->post('pekerjaan_id', TRUE),
+                    'jabatan' => $this->input->post('jabatan', TRUE),
+                    'instansi' => $this->input->post('instansi', TRUE),
+                    'no_telpon' => $this->input->post('no_telpon', TRUE),
+                    'email' => $this->input->post('email', TRUE),
+                );
+                $this->Karyawan_model->insert($data);
+                $this->session->set_flashdata('message', 'Create Record Success');
+            } else {
+                $this->session->set_flashdata('error', 'Peserta sudah terdaftar dengan nomor HP/WA/Email tersebut');
+            }
             redirect(site_url('karyawan'));
         }
     }
@@ -108,7 +119,6 @@ class Karyawan extends CI_Controller
     public function update($id)
     {
         $row = $this->Karyawan_model->get_by_id(decrypt_url($id));
-
         if ($row) {
             $data = array(
                 'button' => 'Update',

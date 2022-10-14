@@ -23,6 +23,10 @@ class Form extends CI_Controller
 
     public function create_action()
     {
+        $no_telpon = $this->input->post('no_telpon', TRUE);
+        $email = $this->input->post('email', TRUE);
+        $jml = $this->db->query("SELECT * from karyawan where no_telpon='$no_telpon' OR email='$email'")->num_rows();
+        if ($jml == 0) {
             $data = array(
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
                 'pekerjaan_id' => $this->input->post('pekerjaan_id', TRUE),
@@ -33,6 +37,10 @@ class Form extends CI_Controller
             );
             $this->Karyawan_model->insert($data);
             $this->session->set_flashdata('message', 'Pendaftaran Undian Doorprize Berhasil');
+        } else {
+            $this->session->set_flashdata('error', 'Peserta sudah terdaftar dengan nomor HP/WA/Email tersebut');
+        }
+
         redirect(site_url('form'));
     }
 }

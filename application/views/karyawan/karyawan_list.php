@@ -4,7 +4,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				<h4 class="modal-title">Import Data Peserta</h4><br>
-				<a href="<?= base_url() ?>format-upload-peserta.xlsx" type="button" class="btn btn-success">Download Format Upload</a>
+				<a href="<?= base_url() ?>format-upload.xlsx" type="button" class="btn btn-success">Download Format Upload</a>
 			</div>
 			<div class="modal-body">
 				<form action="<?= base_url() ?>karyawan/import" method="POST" enctype="multipart/form-data">
