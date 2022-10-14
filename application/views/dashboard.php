@@ -64,7 +64,7 @@ td.pw3
 
 </style>
 
-<div id="content" class="content">
+<div id="content" class="content" >
 	<div class="row">
 		<div class="col-md-7" style="position: relative;">
 			<div class="panel panel-inverse">
@@ -72,7 +72,7 @@ td.pw3
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
-								<div class="box-body">
+								<div class="box-body" style=" overflow-y: auto;">
 									<center>
 										<div class="wrapper">
 											<table cellpadding="0" cellspacing="0" border="0">
@@ -129,7 +129,7 @@ td.pw3
 										<table id="data-table" class="table table-sm table-bordered table-hover table-td-valign-middle">
 											<thead>
 												<tr>
-													<th>ID</th>
+													<th style="width: 7%;">ID</th>
 													<th>Nama Peserta</th>
 													<th>Tindakan</th>
 												</tr>
@@ -154,6 +154,30 @@ td.pw3
 
 									</div>
 								</div>
+
+								<div class="box-body">
+									<div class="box-body">
+										<h3>Peserta</h3>
+										<table id="myTable" class="table table-sm table-bordered table-hover table-td-valign-middle">
+											<thead>
+												<tr>
+													<th style="width: 7%;">ID</th>
+													<th>Nama Peserta</th>
+												</tr>
+											</thead>
+											<tbody><?php $no = 1;
+													foreach ($karyawan_data as $karyawan) {
+													?>
+													<tr>
+														<td><?php echo $karyawan->karyawan_id ?></td>
+														<td><?php echo $karyawan->nama_karyawan ?></td>
+													</tr>
+												<?php } ?>
+											</tbody>
+										</table>
+
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -163,6 +187,8 @@ td.pw3
 	</div>
 
 </div>
+
+
 
 <script>
 	let theWheel = new Winwheel({
@@ -342,7 +368,7 @@ td.pw3
 			var row = $(this).closest('tr');
 			swal.fire({
 				title: 'Apakah anda yakin?',
-				text: "Karyawan " + nama_karyawan + " akan dihapus dari daftar pemenang!",
+				text: "Peserta " + nama_karyawan + " akan dihapus dari daftar pemenang!",
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -377,3 +403,12 @@ td.pw3
 		});
 	})
 </script>
+
+<script>
+
+	$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+

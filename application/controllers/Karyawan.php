@@ -15,8 +15,7 @@ class Karyawan extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Karyawan_model');
-        $this->load->model('Unit_kerja_model');
-        $this->load->model('Jabatan_model');
+        $this->load->model('Pekerjaan_model');
         $this->load->library('form_validation');
     }
 
@@ -49,12 +48,16 @@ class Karyawan extends CI_Controller
             if (!empty($sheetData)) {
                 for ($i = 1; $i < count($sheetData); $i++) {
                     $nama_karyawan = $sheetData[$i][0];
-                    $jenis_kelamin = $sheetData[$i][1];
-                    $no_telpon = $sheetData[$i][2];
+                    $instansi = $sheetData[$i][1];
+                    $jabatan = $sheetData[$i][2];
+                    $no_telpon = $sheetData[$i][3];
+                    $email = $sheetData[$i][4];
                         $data = array(
                             'nama_karyawan' => $nama_karyawan,
-                            'jenis_kelamin' => $jenis_kelamin,
+                            'instansi' => $instansi,
+                            'jabatan' => $jabatan,
                             'no_telpon' => $no_telpon,
+                            'email' => $email,
                         );
                         $this->db->insert('karyawan', $data);
                 }
@@ -63,39 +66,19 @@ class Karyawan extends CI_Controller
         redirect(base_url('karyawan'), 'refresh');
     }
 
-
-    public function read($id)
-    {
-        $row = $this->Karyawan_model->get_by_id(decrypt_url($id));
-        if ($row) {
-            $data = array(
-                'karyawan_id' => $row->karyawan_id,
-                'nama_karyawan' => $row->nama_karyawan,
-                'jabatan_id' => $row->jabatan_id,
-                'unit_kerja_id' => $row->unit_kerja_id,
-                'jenis_kelamin' => $row->jenis_kelamin,
-                'no_telpon' => $row->no_telpon,
-            );
-            $this->template->load('template', 'karyawan/karyawan_read', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('karyawan'));
-        }
-    }
-
     public function create()
     {
         $data = array(
             'button' => 'Create',
-            'jabatan' => $this->Jabatan_model->get_all(),
-            'unit_kerja' => $this->Unit_kerja_model->get_all(),
+            'pekerjaan' => $this->Pekerjaan_model->get_all(),
             'action' => site_url('karyawan/create_action'),
             'karyawan_id' => set_value('karyawan_id'),
             'nama_karyawan' => set_value('nama_karyawan'),
-            'jabatan_id' => set_value('jabatan_id'),
-            'unit_kerja_id' => set_value('unit_kerja_id'),
-            'jenis_kelamin' => set_value('jenis_kelamin'),
+            'pekerjaan_id' => set_value('pekerjaan'),
+            'jabatan' => set_value('jabatan'),
+            'instansi' => set_value('instansi'),
             'no_telpon' => set_value('no_telpon'),
+            'email' => set_value('email'),
         );
         $this->template->load('template', 'karyawan/karyawan_form', $data);
     }
@@ -109,10 +92,11 @@ class Karyawan extends CI_Controller
         } else {
             $data = array(
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
-                'jabatan_id' => $this->input->post('jabatan_id', TRUE),
-                'unit_kerja_id' => $this->input->post('unit_kerja_id', TRUE),
-                'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
+                'pekerjaan_id' => $this->input->post('pekerjaan_id', TRUE),
+                'jabatan' => $this->input->post('jabatan', TRUE),
+                'instansi' => $this->input->post('instansi', TRUE),
                 'no_telpon' => $this->input->post('no_telpon', TRUE),
+                'email' => $this->input->post('email', TRUE),
             );
 
             $this->Karyawan_model->insert($data);
@@ -130,13 +114,13 @@ class Karyawan extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('karyawan/update_action'),
                 'karyawan_id' => set_value('karyawan_id', $row->karyawan_id),
-                'jabatan' => $this->Jabatan_model->get_all(),
-                'unit_kerja' => $this->Unit_kerja_model->get_all(),
+                'pekerjaan' => $this->Pekerjaan_model->get_all(),
                 'nama_karyawan' => set_value('nama_karyawan', $row->nama_karyawan),
-                'jabatan_id' => set_value('jabatan_id', $row->jabatan_id),
-                'unit_kerja_id' => set_value('unit_kerja_id', $row->unit_kerja_id),
-                'jenis_kelamin' => set_value('jenis_kelamin', $row->jenis_kelamin),
+                'pekerjaan_id' => set_value('pekerjaan_id', $row->pekerjaan_id),
+                'jabatan' => set_value('jabatan', $row->jabatan),
+                'instansi' => set_value('jabatan', $row->instansi),
                 'no_telpon' => set_value('no_telpon', $row->no_telpon),
+                'email' => set_value('email', $row->email),
             );
             $this->template->load('template', 'karyawan/karyawan_form', $data);
         } else {
@@ -154,10 +138,11 @@ class Karyawan extends CI_Controller
         } else {
             $data = array(
                 'nama_karyawan' => $this->input->post('nama_karyawan', TRUE),
-                'jabatan_id' => $this->input->post('jabatan_id', TRUE),
-                'unit_kerja_id' => $this->input->post('unit_kerja_id', TRUE),
-                'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
+                'pekerjaan_id' => $this->input->post('pekerjaan_id', TRUE),
+                'jabatan' => $this->input->post('jabatan', TRUE),
+                'instansi' => $this->input->post('instansi', TRUE),
                 'no_telpon' => $this->input->post('no_telpon', TRUE),
+                'email' => $this->input->post('email', TRUE),
             );
 
             $this->Karyawan_model->update($this->input->post('karyawan_id', TRUE), $data);
@@ -183,11 +168,11 @@ class Karyawan extends CI_Controller
     public function _rules()
     {
         $this->form_validation->set_rules('nama_karyawan', 'nama karyawan', 'trim|required');
-        $this->form_validation->set_rules('jabatan_id', 'jabatan id', 'trim|required');
-        $this->form_validation->set_rules('unit_kerja_id', 'unit kerja id', 'trim|required');
-        $this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
-        $this->form_validation->set_rules('no_telpon', 'no telpon', 'trim|required');
-
+        $this->form_validation->set_rules('pekerjaan_id', 'pekerjaan id', 'trim|required');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'trim|required');
+        $this->form_validation->set_rules('instansi', 'Instansi', 'trim|required');
+        $this->form_validation->set_rules('no_telpon', 'Nomor HP/WA', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('karyawan_id', 'karyawan_id', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
@@ -215,7 +200,7 @@ class Karyawan extends CI_Controller
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
         xlsWriteLabel($tablehead, $kolomhead++, "Nama Karyawan");
-        xlsWriteLabel($tablehead, $kolomhead++, "Jabatan Id");
+        xlsWriteLabel($tablehead, $kolomhead++, "pekerjaan Id");
         xlsWriteLabel($tablehead, $kolomhead++, "Unit Kerja Id");
         xlsWriteLabel($tablehead, $kolomhead++, "Jenis Kelamin");
         xlsWriteLabel($tablehead, $kolomhead++, "No Telpon");
@@ -226,9 +211,8 @@ class Karyawan extends CI_Controller
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
             xlsWriteLabel($tablebody, $kolombody++, $data->nama_karyawan);
-            xlsWriteNumber($tablebody, $kolombody++, $data->jabatan_id);
-            xlsWriteNumber($tablebody, $kolombody++, $data->unit_kerja_id);
-            xlsWriteLabel($tablebody, $kolombody++, $data->jenis_kelamin);
+            xlsWriteNumber($tablebody, $kolombody++, $data->pekerjaan);
+            xlsWriteNumber($tablebody, $kolombody++, $data->jabatan);
             xlsWriteNumber($tablebody, $kolombody++, $data->no_telpon);
 
             $tablebody++;

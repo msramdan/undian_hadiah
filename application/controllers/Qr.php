@@ -13,9 +13,9 @@ class Qr extends CI_Controller
     public function index()
     {
         is_login();
-        // $unit_kerja = $this->Unit_kerja_model->get_all();
+        // $jabatan = $this->jabatan_model->get_all();
         $data = array(
-            // 'unit_kerja_data' => $unit_kerja,
+            // 'jabatan_data' => $jabatan,
         );
         $this->template->load('template', 'qr/index', $data);
     }

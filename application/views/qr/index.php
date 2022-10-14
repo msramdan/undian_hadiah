@@ -42,7 +42,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <center>
-                                    <img style="padding: 0px;" src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=https%3A%2F%2Fwww.evdigi.my.id/form%2F&choe=UTF-8" title="Link to Fotm" />
+                                    <img style="padding: 0px;width:100%" src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=https%3A%2F%2Fwww.evdigi.my.id/form%2F&choe=UTF-8" title="Link to Fotm" />
                                 </center>
                             </div>
                         </div>

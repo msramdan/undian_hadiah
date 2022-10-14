@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller {
 		$data = array(
             'karyawan_data' => $this->Karyawan_model->get_all(),
 			'pemenang_list' => $this->Karyawan_model->list_pemenang(),
+			'karyawan_data' =>  $this->Karyawan_model->get_all(),
 			'disclass' => $this
         );
 		$this->template->load('template','dashboard', $data);

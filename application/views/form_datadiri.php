@@ -58,34 +58,31 @@
                                     <input type="text" class="form-control" name="nama_karyawan" id="nama_karyawan" placeholder="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="jabatan_id">Jabatan</label>
-                                    <select name="jabatan_id" class="form-control theSelect" required>
+                                    <label for="pekerjaan_id">Pekerjaan</label>
+                                    <select name="pekerjaan_id" class="form-control theSelect" required>
                                         <option value="">-- Pilih -- </option>
-                                        <?php foreach ($jabatan as $key => $data) { ?>
-                                            <option value="<?php echo $data->jabatan_id ?>"><?php echo $data->nama_jabatan ?></option>
+                                        <?php foreach ($pekerjaan as $key => $data) { ?>
+                                            <option value="<?php echo $data->pekerjaan_id ?>"><?php echo $data->nama_pekerjaan ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="unit_kerja_id">Unit Kerja</label>
-                                    <select name="unit_kerja_id" class="form-control theSelect" required>
-                                        <option value="">-- Pilih -- </option>
-                                        <?php foreach ($unit_kerja as $key => $data) { ?>
-                                            <option value="<?php echo $data->unit_kerja_id ?>"><?php echo $data->nama_unit_kerja ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    <label for="instansi">Instansi</label>
+                                    <input type="text" name="instansi" class="form-control" id="instansi" placeholder="" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="jenis_kelamin">Jenis Kelamin</label>
-                                    <select name="jenis_kelamin" class="form-control theSelect" required>
-                                        <option value="">-- Pilih --</option>
-                                        <option value="Perempuan">Perempuan</option>
-                                        <option value="Laki-laki">Laki-laki</option>
-                                    </select>
+                                    <label for="jabatan">Jabatan</label>
+                                    <input type="text" name="jabatan" class="form-control" id="jabatan" placeholder="" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="no_telpon">No Telpon</label>
+                                    <label for="no_telpon">Nomor HP/WA</label>
                                     <input type="text" name="no_telpon" class="form-control" id="no_telpon" placeholder="" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" class="form-control" id="email" placeholder="" required>
                                 </div>
                                 <button type="submit" class="btn btn-sm btn-primary m-r-5"><i class="fa fa-floppy-o" aria-hidden="true"></i> Kirim</button>
                             </form>

@@ -3,8 +3,8 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h4 class="modal-title">Import Data Karyawan</h4><br>
-				<a href="<?= base_url() ?>format-upload-karyawan.xlsx" type="button" class="btn btn-success">Download Format Upload</a>
+				<h4 class="modal-title">Import Data Peserta</h4><br>
+				<a href="<?= base_url() ?>format-upload-peserta.xlsx" type="button" class="btn btn-success">Download Format Upload</a>
 			</div>
 			<div class="modal-body">
 				<form action="<?= base_url() ?>karyawan/import" method="POST" enctype="multipart/form-data">
@@ -28,7 +28,7 @@
 <div id="content" class="content">
 	<ol class="breadcrumb pull-right">
 		<li><a href="javascript:;">Dashboard</a></li>
-		<li class="active">Karyawan</li>
+		<li class="active">Peserta</li>
 	</ol>
 	<div class="row">
 		<div class="col-md-12">
@@ -40,7 +40,7 @@
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 						<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 					</div>
-					<h4 class="panel-title">Data Karyawan</h4>
+					<h4 class="panel-title">Data Peserta</h4>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -62,10 +62,11 @@
 												<tr>
 													<th>No</th>
 													<th>Nama Peserta</th>
+													<th>Pekerjaan</th>
+													<th>Instansi</th>
 													<th>Jabatan</th>
-													<th>Unit Kerja</th>
-													<th>Jenis Kelamin</th>
-													<th>No Telpon</th>
+													<th>Nomor HP/WA</th>
+													<th>Email</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -75,11 +76,12 @@
 													<tr>
 														<td><?= $no++ ?></td>
 														<td><?php echo $karyawan->nama_karyawan ?></td>
-														<td><?php echo $karyawan->nama_jabatan ?></td>
-														<td><?php echo $karyawan->nama_unit_kerja ?></td>
-														<td><?php echo $karyawan->jenis_kelamin ?></td>
+														<td><?php echo $karyawan->nama_pekerjaan ?></td>
+														<td><?php echo $karyawan->instansi ?></td>
+														<td><?php echo $karyawan->jabatan ?></td>
 														<td><?php echo $karyawan->no_telpon ?></td>
-														<td style="text-align:center" width="200px">
+														<td><?php echo $karyawan->email ?></td>
+														<td style="text-align:center">
 															<?php
 
 															echo anchor(site_url('karyawan/update/' . encrypt_url($karyawan->karyawan_id)), '<i class="fa fa-pencil" aria-hidden="true"></i>', 'class="btn btn-primary btn-sm update_data"');

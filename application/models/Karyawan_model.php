@@ -18,8 +18,7 @@ class Karyawan_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->join('jabatan', 'jabatan.jabatan_id = karyawan.jabatan_id', 'left');
-        $this->db->join('unit_kerja', 'unit_kerja.unit_kerja_id = karyawan.unit_kerja_id', 'left');
+        $this->db->join('pekerjaan', 'pekerjaan.pekerjaan_id = karyawan.pekerjaan_id', 'left');
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
@@ -36,8 +35,8 @@ class Karyawan_model extends CI_Model
         $this->db->like('karyawan_id', $q);
 	$this->db->or_like('nik', $q);
 	$this->db->or_like('nama_karyawan', $q);
-	$this->db->or_like('jabatan_id', $q);
-	$this->db->or_like('unit_kerja_id', $q);
+	$this->db->or_like('pekerjaan_id', $q);
+	$this->db->or_like('jabatan', $q);
 	$this->db->or_like('jenis_kelamin', $q);
 	$this->db->or_like('no_telpon', $q);
 	$this->db->from($this->table);

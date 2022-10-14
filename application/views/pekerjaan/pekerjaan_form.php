@@ -1,7 +1,7 @@
 <div id="content" class="content">
 <ol class="breadcrumb pull-right">
 	<li><a href="javascript:;">Dashboard</a></li>
-	<li class="active">Unit_kerja</li>
+	<li class="active">Pekerjaan</li>
 </ol>
 <div class="row">
 	<div class="col-md-12">
@@ -13,17 +13,17 @@
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
 					<a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
 				</div>
-				<h4 class="panel-title">Data UNIT_KERJA</h4>
+				<h4 class="panel-title">Data PEKERJAAN</h4>
 			</div>
 			<div class="panel-body">
         
             <form action="<?php echo $action; ?>" method="post">
             <thead>
             <table id="data-table-default" class="table  table-bordered table-hover table-td-valign-middle">
-	    <tr><td>Nama Unit Kerja <?php echo form_error('nama_unit_kerja') ?></td><td><input type="text" class="form-control" name="nama_unit_kerja" id="nama_unit_kerja" placeholder="Nama Unit Kerja" value="<?php echo $nama_unit_kerja; ?>" /></td></tr>
-	    <tr><td></td><td><input type="hidden" name="unit_kerja_id" value="<?php echo $unit_kerja_id; ?>" /> 
+	    <tr><td>Nama Pekerjaan <?php echo form_error('nama_pekerjaan') ?></td><td><input type="text" class="form-control" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Pekerjaan" value="<?php echo $nama_pekerjaan; ?>" /></td></tr>
+	    <tr><td></td><td><input type="hidden" name="pekerjaan_id" value="<?php echo $pekerjaan_id; ?>" /> 
 	    <button type="submit" class="btn btn-danger"><i class="fa fa-save"></i> <?php echo $button ?></button> 
-	    <a href="<?php echo site_url('unit_kerja') ?>" class="btn btn-info"><i class="fa fa-undo"></i> Kembali</a></td></tr>
+	    <a href="<?php echo site_url('pekerjaan') ?>" class="btn btn-info"><i class="fa fa-undo"></i> Kembali</a></td></tr>
 </thead>
 	</table></form>        </div>
 </div>

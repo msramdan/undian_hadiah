@@ -3,11 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Unit_kerja_model extends CI_Model
+class Pekerjaan_model extends CI_Model
 {
 
-    public $table = 'unit_kerja';
-    public $id = 'unit_kerja_id';
+    public $table = 'pekerjaan';
+    public $id = 'pekerjaan_id';
     public $order = 'DESC';
 
     function __construct()
@@ -31,8 +31,8 @@ class Unit_kerja_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('unit_kerja_id', $q);
-	$this->db->or_like('nama_unit_kerja', $q);
+        $this->db->like('pekerjaan_id', $q);
+	$this->db->or_like('nama_pekerjaan', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
