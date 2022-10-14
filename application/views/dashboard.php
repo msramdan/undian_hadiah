@@ -222,7 +222,7 @@ td.pw3
 		'innerRadius': 75, // Make wheel hollow so segments don't go all way to center.
 		'textFontSize': 8, // Set default font size for the segments.
 		// 'textOrientation': 'vertical', // Make text vertial so goes down from the outside of wheel.
-		'textAlignment': 'outer', // Align text to outside of wheel.
+		'textAlignment': 'inner', // Align text to outside of wheel.
 		'numSegments': <?= $disclass->jumlah_karyawanyangbelummenang() ?>, // Specify number of segments.
 		'segments': <?= $disclass->list_karyawanbelummenang() ?>,
 		'animation': // Specify the animation to use.
