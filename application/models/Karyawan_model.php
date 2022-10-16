@@ -76,7 +76,7 @@ class Karyawan_model extends CI_Model
     }
 
     function list_pemenang() {
-        $query = "SELECT karyawan.karyawan_id as 'karyawan_id', karyawan.nama_karyawan as 'nama_karyawan' FROM `pemenang` JOIN `karyawan` ON karyawan.karyawan_id = pemenang.karyawan_id ORDER BY pemenang_id DESC;";
+        $query = "SELECT karyawan.karyawan_id as 'karyawan_id', karyawan.nama_karyawan as 'nama_karyawan' FROM `pemenang` JOIN `karyawan` ON karyawan.karyawan_id = pemenang.karyawan_id ORDER BY pemenang.timestamp DESC;";
         return $this->db->query($query)->result();
     }
 
