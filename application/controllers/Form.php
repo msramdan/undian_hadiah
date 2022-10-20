@@ -10,12 +10,14 @@ class Form extends CI_Controller
         parent::__construct();
         $this->load->model('Pekerjaan_model');
         $this->load->model('Karyawan_model');
+        $this->load->model('Banner_model');
     }
 
     public function index()
     {
         $data = array(
             'pekerjaan' => $this->Pekerjaan_model->get_all(),
+            'banner' => $this->Banner_model->get_by_id(1),
         );
 
         $this->load->view('form_datadiri', $data);

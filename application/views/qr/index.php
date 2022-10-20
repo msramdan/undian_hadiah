@@ -16,8 +16,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="box-body">
-                                    <img src="<?= base_url() ?>temp/assets/gambar1.png" style="width: 100%;" />
-                                    <img src="<?= base_url() ?>temp/assets/gambar2.png" style="width: 100%;" />
+                                    <img src="<?php echo base_url(); ?>temp/assets/banner/<?= $banner->photo ?>" style="width: 100%;" />
 
                                 </div>
                             </div>

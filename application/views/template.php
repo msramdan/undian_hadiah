@@ -125,6 +125,8 @@
 					<li><a href="<?= base_url() ?>karyawan"><i class="fa fa-users"></i> <span>Peserta</span></a></li>
 					<li><a href="<?= base_url() ?>pekerjaan"><i class="fa fa-list"></i> <span>Pekerjaan</span></a></li>
 					<li><a href="<?= base_url() ?>user"><i class="fa fa-user"></i> <span>Data User</span></a></li>
+					<li><a href="<?= base_url() ?>banner/update"><i class="fa fa-image"></i> <span>Banner Management</span></a></li>
+					<li><a href="<?= base_url() ?>backup"><i class="fa fa-download"></i> <span>Backup Database</span></a></li>
 					<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
 				</ul>
 			</div>

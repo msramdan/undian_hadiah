@@ -47,8 +47,7 @@
                 <div class="col-md-offset-2 col-md-6 ">
                     <div class="panel panel-inverse" data-sortable-id="form-stuff-3">
                         <div class="panel-body">
-                            <img src="<?= base_url() ?>temp/assets/gambar1.png" style="width: 100%;" />
-                            <img src="<?= base_url() ?>temp/assets/gambar2.png" style="width: 100%;" />
+                        <img src="<?php echo base_url(); ?>temp/assets/banner/<?= $banner->photo ?>" style="width: 100%;" />
 
                             <hr>
 

@@ -8,14 +8,15 @@ class Qr extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        is_login();
+        $this->load->model('Banner_model');
     }
 
     public function index()
     {
-        is_login();
-        // $jabatan = $this->jabatan_model->get_all();
+        
         $data = array(
-            // 'jabatan_data' => $jabatan,
+            'banner' => $this->Banner_model->get_by_id(1),
         );
         $this->template->load('template', 'qr/index', $data);
     }

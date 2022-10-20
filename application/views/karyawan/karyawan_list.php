@@ -52,7 +52,8 @@
 											<div style="padding-bottom: 10px;">
 												<?php echo anchor(site_url('karyawan/create'), '<i class="fa fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm tambah_data"'); ?>
 
-												<a href="#modal-dialog-import" class="btn btn-sm btn-success" data-toggle="modal">Import Excel</a>
+												<a href="#modal-dialog-import" class="btn btn-sm btn-success" data-toggle="modal"><i class="fa fa-upload" aria-hidden="true"></i> Import Excel</a>
+												<?php echo anchor(site_url('karyawan/export'), '<i class="fa fa-download" aria-hidden="true"></i> Export Excel', 'class="btn btn-success btn-sm tambah_data"'); ?>
 											</div>
 										</div>
 									</div>
