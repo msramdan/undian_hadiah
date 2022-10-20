@@ -472,4 +472,10 @@ td.pw3
 		});
 	})
 </script>
+<script>
+
+	$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
 

@@ -272,7 +272,7 @@ class Karyawan extends CI_Controller
         $sheet->setCellValue('C3', "Pekerjaan"); // Set kolom C3 dengan tulisan "NAMA"
         $sheet->setCellValue('D3', "Instansi"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
         $sheet->setCellValue('E3', "Jabatan"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $sheet->setCellValue('F3', "Nomoer HP/WA"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $sheet->setCellValue('F3', "Nomor HP/WA"); // Set kolom E3 dengan tulisan "ALAMAT"
         $sheet->setCellValue('G3', "Email"); // Set kolom E3 dengan tulisan "ALAMAT"
         // Apply style header yang telah kita buat tadi ke masing-masing kolom header
         $sheet->getStyle('A3')->applyFromArray($style_col);
